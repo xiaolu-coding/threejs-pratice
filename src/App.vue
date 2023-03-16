@@ -2,6 +2,8 @@
 
 <script setup lang="ts">
 import * as Three from "three"
+// 导入轨道控制器
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 
 // 创建场景
 const scene = new Three.Scene()
@@ -37,7 +39,19 @@ renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
 // 使用渲染器，通过相机将场景渲染进来
-renderer.render(scene, camera)
+// renderer.render(scene, camera)
+
+// 创建轨道控制器
+const controls = new OrbitControls(camera, renderer.domElement)
+
+// 设置渲染函数
+const render = () => {
+  renderer.render(scene, camera)
+  // 渲染动画帧 
+  requestAnimationFrame(render)
+}
+
+render()
 </script>
 
 <style scoped></style>
