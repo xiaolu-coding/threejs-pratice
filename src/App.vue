@@ -58,18 +58,27 @@ scene.add(axesHelper)
 
 console.log(cube, "cube")
 
+// 设置时钟
+const clock = new Three.Clock()
+
 // 设置渲染函数
-const render = (time?: number) => {
-  // cube.position.x += 0.01
-  // cube.rotation.x += 0.01
-  // if (cube.position.x >= 5) {
-  //   cube.position.x = 0
-  // }
-  let t = (time! /1000) % 5;
-   if (cube.position.x >= 5) {
-   cube.position.x = 0
- }
+const render = () => {
+  //   let t = (time! /1000) % 5;
+  //    if (cube.position.x >= 5) {
+  //    cube.position.x = 0
+  //  }
+  // cube.position.x = t * 1
+  // 获取间隔时间
+  // let deltaTime = clock.getDelta()
+  // 获取时钟运行总时长
+  let time = clock.getElapsedTime()
+
+  let t = time % 5
+  if (cube.position.x >= 5) {
+    cube.position.x = 0
+  }
   cube.position.x = t * 1
+
   renderer.render(scene, camera)
   // 渲染动画帧
   requestAnimationFrame(render)
