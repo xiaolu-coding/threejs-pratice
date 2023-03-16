@@ -3,7 +3,7 @@
 <script setup lang="ts">
 import * as Three from "three"
 // 导入轨道控制器
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 
 // 创建场景
 const scene = new Three.Scene()
@@ -46,11 +46,21 @@ const controls = new OrbitControls(camera, renderer.domElement)
 // 添加坐标轴辅助器
 const axesHelper = new Three.AxesHelper(5)
 scene.add(axesHelper)
+// 通过set方法修改物体的位置
+// cube.position.set(5, 0, 0)
+// 通过属性值方式修改物体的位置
+cube.position.x = 5
+
+console.log(cube, "cube")
 
 // 设置渲染函数
 const render = () => {
+  cube.position.x += 0.01
+  if (cube.position.x >= 5) {
+    cube.position.x = 0
+  }
   renderer.render(scene, camera)
-  // 渲染动画帧 
+  // 渲染动画帧
   requestAnimationFrame(render)
 }
 
