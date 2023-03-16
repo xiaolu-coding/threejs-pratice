@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@types/three': ^0.149.0
   '@vitejs/plugin-vue': ^4.0.0
+  gsap: ^3.11.4
   three: ^0.150.1
   typescript: ^4.9.3
   vite: ^4.1.0
@@ -10,6 +11,7 @@ specifiers:
   vue-tsc: ^1.0.24
 
 dependencies:
+  gsap: 3.11.4
   three: 0.150.1
   vue: 3.2.47
 
@@ -437,6 +439,10 @@ packages:
   /function-bind/1.1.1:
     resolution: {integrity: sha1-pWiZ0+o8m6uHS7l3O3xe3pL0iV0=}
     dev: true
+
+  /gsap/3.11.4:
+    resolution: {integrity: sha512-McHhEguHyExMMnjqKA8G+7TvxmlKQGMbjgwAilnFe1e4id7V/tFveRQ2YMZhTYu0oxHGWvbPltdVYQOu3z1SCA==}
+    dev: false
 
   /has/1.0.3:
     resolution: {integrity: sha1-ci18v8H2qoJB8W3YFOAR4fQeh5Y=}

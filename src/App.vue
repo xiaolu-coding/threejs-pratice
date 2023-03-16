@@ -4,6 +4,7 @@
 import * as Three from "three"
 // 导入轨道控制器
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
+import gsap from "gsap"
 
 // 创建场景
 const scene = new Three.Scene()
@@ -46,39 +47,13 @@ const controls = new OrbitControls(camera, renderer.domElement)
 // 添加坐标轴辅助器
 const axesHelper = new Three.AxesHelper(5)
 scene.add(axesHelper)
-// 通过set方法修改物体的位置
-// cube.position.set(5, 0, 0)
-// 通过属性值方式修改物体的位置
-// cube.position.x = 5
 
-// 缩放
-// cube.scale.set(3, 2, 1)
-// 旋转 45度
-// cube.rotation.set(Math.PI / 4, 0, 0)
-
-console.log(cube, "cube")
-
-// 设置时钟
-const clock = new Three.Clock()
+// 设置动画
+gsap.to(cube.position, {x: 5, duration: 5})
+gsap.to(cube.rotation, {x: Math.PI * 2, duration: 5})
 
 // 设置渲染函数
 const render = () => {
-  //   let t = (time! /1000) % 5;
-  //    if (cube.position.x >= 5) {
-  //    cube.position.x = 0
-  //  }
-  // cube.position.x = t * 1
-  // 获取间隔时间
-  // let deltaTime = clock.getDelta()
-  // 获取时钟运行总时长
-  let time = clock.getElapsedTime()
-
-  let t = time % 5
-  if (cube.position.x >= 5) {
-    cube.position.x = 0
-  }
-  cube.position.x = t * 1
-
   renderer.render(scene, camera)
   // 渲染动画帧
   requestAnimationFrame(render)
