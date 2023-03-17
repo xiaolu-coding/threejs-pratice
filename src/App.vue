@@ -44,6 +44,8 @@ document.body.appendChild(renderer.domElement)
 
 // 创建轨道控制器
 const controls = new OrbitControls(camera, renderer.domElement)
+// 设置控制器阻尼、让控制器更有真实效果
+controls.enableDamping = true;
 // 添加坐标轴辅助器
 const axesHelper = new Three.AxesHelper(5)
 scene.add(axesHelper)
@@ -72,11 +74,23 @@ gsap.to(cube.rotation, {
 
 window.addEventListener('click', () => {
   animate1.isActive() ? animate1.pause() : animate1.resume()
-  
+})
+
+window.addEventListener('resize', () => {
+  // 更新摄像头
+  camera.aspect = window.innerWidth / window.innerHeight;
+  // 更新摄像机的投影矩阵
+  camera.updateProjectionMatrix();
+  // 更新渲染器
+  renderer.setSize(window.innerWidth, window.innerHeight)
+  // 设置渲染器的像素比
+  renderer.setPixelRatio(window.devicePixelRatio)
 })
 
 // 设置渲染函数
 const render = () => {
+  // 添加控制器阻尼后，要在每帧进行更新
+  controls.update()
   renderer.render(scene, camera)
   // 渲染动画帧
   requestAnimationFrame(render)
