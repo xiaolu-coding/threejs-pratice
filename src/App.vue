@@ -5,6 +5,7 @@ import * as Three from "three"
 // 导入轨道控制器
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import gsap from "gsap"
+import * as dat from "dat.gui"
 
 // 创建场景
 const scene = new Three.Scene()
@@ -106,6 +107,35 @@ const render = () => {
 }
 
 render()
+
+const gui = new dat.GUI()
+gui
+  .add(cube.position, "x")
+  .min(0)
+  .max(5)
+  .step(0.1)
+  .name("移动x轴")
+  .onFinishChange((val) => console.log("val", val))
+
+const params = {
+  color: "#ffff00",
+  fn: () => {
+    // 让立方体运动起来
+    gsap.to(cube.position, { x: 5, duration: 2, yoyo: true, repeat: -1 })
+  },
+}
+// 修改物体的颜色
+gui
+  .addColor(params, "color")
+  .onFinishChange((val) => cube.material.color.set(val))
+
+gui.add(cube, "visible").name("是否显示")
+// 设置按钮点击触发事件
+gui.add(params, 'fn').name('立方体运动')
+
+const folder = gui.addFolder('设置立方体')
+
+folder.add(cube.material, 'wireframe').name('是否隐藏线框')
 </script>
 
 <style scoped></style>
